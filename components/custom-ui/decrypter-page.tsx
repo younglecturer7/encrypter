@@ -14,7 +14,7 @@ export function DecrypterCard() {
   return (
     <Card className="w-full max-w-xl">
       <CardHeader>
-        <CardTitle>Messager Decrypter UI</CardTitle>
+        <CardTitle>Message Decrypter App</CardTitle>
         <CardDescription>
           Decrypt your message using the key provided.
         </CardDescription>
