@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { type } from './../ui/chart';
+// import { type } from './../ui/chart';
 
 interface formDataProps {
     message: string;
