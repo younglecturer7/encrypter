@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Obono - Encrypter App",
+  title: "Mr. Obono - Encrypter App",
   description: "this is a simple encrypter app",
 };
 

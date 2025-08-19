@@ -3,20 +3,20 @@
 import * as React from "react"
 import {
   IconCamera,
-  IconChartBar,
+  // IconChartBar,
   IconDashboard,
   IconDatabase,
   IconFileAi,
   IconFileDescription,
-  IconFileWord,
-  IconFolder,
+  // IconFileWord,
+  // IconFolder,
   IconHelp,
   IconInnerShadowTop,
   IconListDetails,
-  IconReport,
+  // IconReport,
   IconSearch,
   IconSettings,
-  IconUsers,
+  // IconUsers,
 } from "@tabler/icons-react"
 
 import { NavDocuments } from "@/components/nav-documents"
@@ -42,12 +42,12 @@ const data = {
   navMain: [
     {
       title: "Encrypter",
-      url: "#",
+      url: "encrypter",
       icon: IconDashboard,
     },
     {
       title: "Decrypter",
-      url: "#",
+      url: "decrypter",
       icon: IconListDetails,
     },
     // {
