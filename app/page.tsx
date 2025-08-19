@@ -23,7 +23,7 @@ export default function Page() {
       <SidebarInset>
         <SiteHeader />
         <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-row gap-5 mx-auto w-full max-w-screen-xl px-4 py-6 lg:px-6">
+          <div className="@container/main flex max-sm:flex-col gap-10 mx-auto w-full max-w-screen-xl px-4 py-6 lg:px-6">
             {/* <div className="flex flex-row w-full mx-auto gap-4 py-4 md:gap-6 md:py-6"> */}
             {/* <SectionCards />
               <div className="px-4 lg:px-6">
