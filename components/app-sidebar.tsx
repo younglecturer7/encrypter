@@ -3,21 +3,22 @@
 import * as React from "react"
 import {
   IconCamera,
-  // IconChartBar,
+  IconChartBar,
   IconDashboard,
   IconDatabase,
   IconFileAi,
   IconFileDescription,
   // IconFileWord,
-  // IconFolder,
+  IconFolder,
   IconHelp,
   IconInnerShadowTop,
   IconListDetails,
   // IconReport,
   IconSearch,
   IconSettings,
+  IconApps,
   // IconUsers,
-} from "@tabler/icons-react"
+} from "@tabler/icons-react";
 
 import { NavDocuments } from "@/components/nav-documents"
 import { NavMain } from "@/components/nav-main"
@@ -35,31 +36,31 @@ import {
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+    name: "Mr. Obono Ekwe",
+    email: "obonosquare@gmail.com",
     avatar: "",
   },
   navMain: [
     {
+      title: "Encrypter Simulator",
+      url: "encrypter-simulator",
+      icon: IconDashboard,
+    },
+    {
+      title: "Decrypter Simulator",
+      url: "decrypter-simulator",
+      icon: IconListDetails,
+    },
+    {
       title: "Encrypter",
       url: "encrypter",
-      icon: IconDashboard,
+      icon: IconChartBar,
     },
     {
       title: "Decrypter",
       url: "decrypter",
-      icon: IconListDetails,
+      icon: IconFolder,
     },
-    // {
-    //   title: "Analytics",
-    //   url: "#",
-    //   icon: IconChartBar,
-    // },
-    // {
-    //   title: "Projects",
-    //   url: "#",
-    //   icon: IconFolder,
-    // },
     // {
     //   title: "Team",
     //   url: "#",
@@ -161,8 +162,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <a href="#">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Encrypter Decrypter App</span>
+                <IconApps className="!size-5" />
+                <span className="text-base font-semibold">
+                  Encrypter-Decrypter App
+                </span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -170,12 +173,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
+        {/* <NavDocuments items={data.documents} /> */}
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

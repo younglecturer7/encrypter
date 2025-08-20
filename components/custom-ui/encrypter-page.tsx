@@ -1,84 +1,105 @@
-"use client"
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import { Textarea } from "../ui/textarea";
+import z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+import { IconBellCheck } from "@tabler/icons-react";
 // import { type } from './../ui/chart';
 
-interface formDataProps {
-    message: string;
-    compress: string;
-    key: string;
-}
+// declare form schema
+const formSchema = z.object({
+  message: z.string().min(1, "Message is required"),
+});
+
 
 export function EncrypterCard() {
+  // initialize form with react-hook-form and zod for validation
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: { message: "" },
+  });
+
   // handle form submission
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-      const form = event.currentTarget;
-      
-    const formData: formDataProps = {
-      message: (form.elements.namedItem("message") as HTMLInputElement)?.value || "",
-      compress: (form.elements.namedItem("compress") as HTMLInputElement)?.value || "",
-      key: (form.elements.namedItem("key") as HTMLInputElement)?.value || "",
-    };
-    // Handle form submission logic here
-    console.log("Form submitted", formData);
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
+
+    // display a toast notification with the submitted data
+    // you can customize the toast as needed
+   
+    toast.success("Your message had been encrypted.", {
+      // description: (
+      //   <p className="text-sm text-muted-foreground">
+      //     <em className="text-xs">{data.message}</em>
+      //   </p>
+      // ),
+      action: {
+        label: "Undo",
+        onClick: () => console.log("Undo"),
+      },
+      duration: 2000,
+      icon: <IconBellCheck stroke={2} />,
+    });
+
+    console.log("Form Data:", data);
   };
 
   return (
-    <Card className="w-full max-w-xl">
-      <CardHeader>
+    <Card className="w-full md:max-w-xl px-2">
+      <CardHeader className="text-center">
         <CardTitle>Message Encrypter App</CardTitle>
-        <CardDescription>
-          Enter your message you want to encrypt or decrypt.
-        </CardDescription>
       </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit}>
-          <div className="flex flex-col gap-6">
-            <div className="grid gap-2">
-              <Label htmlFor="message">Message</Label>
-              <Input
-                id="message"
-                type="text"
-                placeholder="message to encrypt"
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="compress">Compress Message</Label>
-              </div>
-              <Input id="compress" type="text" placeholder="compress Message" />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="key">Generated Key</Label>
-              </div>
-              <Input id="key" type="text" placeholder="generate key" />
-            </div>
-          </div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <CardContent>
+            <FormField
+              control={form.control}
+              name="message"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Message</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Type your message here for encryption..."
+                      className="resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* <Button type="submit">Submit</Button> */}
+          </CardContent>
+          <CardFooter className="flex-col gap-2">
+            <Button type="submit" className="w-full">
+              Encrypt Message
+            </Button>
+            <Button type="button" variant="outline" className="w-full">
+              Generate key
+            </Button>
+            <Button type="button" variant="outline" className="w-full">
+              Transmit Encrypted Message
+            </Button>
+          </CardFooter>
         </form>
-      </CardContent>
-      <CardFooter className="flex-col gap-2">
-        <Button type="submit" className="w-full">
-          Encrypt Message
-        </Button>
-        <Button type="button" variant="outline" className="w-full">
-          Generate key
-        </Button>
-        <Button type="button" variant="outline" className="w-full">
-          Transmit Encrypted Message
-        </Button>
-      </CardFooter>
+      </Form>
     </Card>
   );
 }
