@@ -3,7 +3,7 @@ import { EncrypterCard } from '@/components/custom-ui/encrypter-page';
 
 function EncrypterPage() {
   return (
-    <div className="flex flex-col mx-auto gap-4 py-4 px-3 md:gap-6 md:py-6">
+    <div className="bg-muted flex min-h-screen flex-col items-center justify-center gap-6 p-6 md:p-10">
       <EncrypterCard />
     </div>
   );
