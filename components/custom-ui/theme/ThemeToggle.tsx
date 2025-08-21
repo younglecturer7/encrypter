@@ -1,6 +1,6 @@
 "use client";
 
-import { Moon, Sun, Monitor, Gift } from "lucide-react";
+import { Moon, Sun, Monitor, Gift, SunDim, SunMoon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import {
@@ -60,6 +60,18 @@ export function ThemeToggle() {
           className={theme === "xmasDark" ? "bg-accent" : ""}
         >
           <Monitor className="mr-2 h-4 w-4" /> Xmas Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setTheme("season")}
+          className={theme === "season" ? "bg-accent" : ""}
+        >
+          <SunDim className="mr-2 h-4 w-4" /> Season
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setTheme("sDark")}
+          className={theme === "sDark" ? "bg-accent" : ""}
+        >
+          <SunMoon className="mr-2 h-4 w-4" /> Season Dark
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

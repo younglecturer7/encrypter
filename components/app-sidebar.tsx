@@ -11,7 +11,7 @@ import {
   // IconFileWord,
   IconFolder,
   IconHelp,
-  IconInnerShadowTop,
+  IconHome,
   IconListDetails,
   // IconReport,
   IconSearch,
@@ -33,6 +33,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import Link from "next/link";
 
 const data = {
   user: {
@@ -41,6 +42,11 @@ const data = {
     avatar: "",
   },
   navMain: [
+    {
+      title: "Home",
+      url: "/",
+      icon: IconHome,
+    },
     {
       title: "Encrypter Simulator",
       url: "encrypter-simulator",
@@ -149,7 +155,7 @@ const data = {
     //   icon: IconFileWord,
     // },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -161,12 +167,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#">
+              <Link href="/">
                 <IconApps className="!size-5" />
                 <span className="text-base font-semibold">
                   Encrypter-Decrypter App
                 </span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

@@ -20,10 +20,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       attribute="class"
       defaultTheme="system"
       enableSystem
-      disableTransitionOnChange
       storageKey="theme"
       enableColorScheme
-      themes={["system", "light", "dark", "xmas", "xmasDark", ]} // extend for custom
+      themes={[
+        "system",
+        "light",
+        "dark",
+        "xmas",
+        "xmasDark",
+        "season",
+        "sDark",
+      ]} // extend for custom
     >
       {children}
     </NextThemesProvider>
