@@ -1,7 +1,3 @@
-/*
-	Installed from https://reactbits.dev/ts/tailwind/
-*/
-
 import React, {
   useState,
   Children,
@@ -11,7 +7,6 @@ import React, {
   ReactNode,
 } from "react";
 import { motion, AnimatePresence, Variants } from "motion/react";
-
 
 interface StepperProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -93,7 +88,7 @@ export default function Stepper({
     >
       <div
         className={`mx-auto w-full max-w-md rounded-4xl shadow-xl ${stepCircleContainerClassName}`}
-        style={{ border: "0px solid #222" }}
+        style={{ border: "1px solid #222" }}
       >
         <div
           className={`${stepContainerClassName} flex w-full items-center p-8`}
@@ -289,8 +284,8 @@ function StepIndicator({
     currentStep === step
       ? "active"
       : currentStep < step
-        ? "inactive"
-        : "complete";
+      ? "inactive"
+      : "complete";
 
   const handleClick = () => {
     if (step !== currentStep && !disableStepIndicators) {
@@ -349,7 +344,7 @@ function StepConnector({ isComplete }: StepConnectorProps) {
   );
 }
 
-interface CheckIconProps extends React.SVGProps<SVGSVGElement> {}
+type CheckIconProps = React.SVGProps<SVGSVGElement>
 
 function CheckIcon(props: CheckIconProps) {
   return (
