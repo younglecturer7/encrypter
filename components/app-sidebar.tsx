@@ -48,22 +48,22 @@ const data = {
       icon: IconHome,
     },
     {
-      title: "Encrypter Simulator",
+      title: "Encryption Simulator",
       url: "encrypter-simulator",
       icon: IconDashboard,
     },
     {
-      title: "Decrypter Simulator",
+      title: "Decryption Simulator",
       url: "decrypter-simulator",
       icon: IconListDetails,
     },
     {
-      title: "Encrypter",
+      title: "Auto Encryption",
       url: "encrypter",
       icon: IconChartBar,
     },
     {
-      title: "Decrypter",
+      title: "Auto Decryption",
       url: "decrypter",
       icon: IconFolder,
     },
@@ -170,7 +170,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <Link href="/">
                 <IconApps className="!size-5" />
                 <span className="text-base font-semibold">
-                  Encrypter-Decrypter App
+                  Encrypt - Decrypt App
                 </span>
               </Link>
             </SidebarMenuButton>

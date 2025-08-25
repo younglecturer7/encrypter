@@ -83,12 +83,12 @@ export default function Stepper({
 
   return (
     <div
-      className="flex min-h-full flex-1 flex-col items-center justify-center p-4 sm:aspect-[4/3] md:aspect-[2/1]"
+      className="flex min-h-full flex-1 flex-col items-center justify-center py-8 sm:aspect-[4/3] md:aspect-[2/1]"
       {...rest}
     >
       <div
-        className={`mx-auto w-full max-w-md rounded-4xl shadow-xl ${stepCircleContainerClassName}`}
-        style={{ border: "1px solid #222" }}
+        className={`mx-auto w-full md:max-w-xl rounded-xl shadow-xl ${stepCircleContainerClassName}`}
+        style={{ border: "0px solid #222" }}
       >
         <div
           className={`${stepContainerClassName} flex w-full items-center p-8`}
@@ -303,8 +303,8 @@ function StepIndicator({
       <motion.div
         variants={{
           inactive: { scale: 1, backgroundColor: "#222", color: "#a3a3a3" },
-          active: { scale: 1, backgroundColor: "#5227FF", color: "#5227FF" },
-          complete: { scale: 1, backgroundColor: "#5227FF", color: "#3b82f6" },
+          active: { scale: 1, backgroundColor: "#039c0b", color: "#039c0b" },
+          complete: { scale: 1, backgroundColor: "#039c0b", color: "#039c0b" },
         }}
         transition={{ duration: 0.3 }}
         className="flex h-8 w-8 items-center justify-center rounded-full font-semibold"
@@ -312,7 +312,7 @@ function StepIndicator({
         {status === "complete" ? (
           <CheckIcon className="h-4 w-4 text-black" />
         ) : status === "active" ? (
-          <div className="h-3 w-3 rounded-full bg-[#060010]" />
+          <div className="h-3 w-3 rounded-full bg-[#039c0b]" />
         ) : (
           <span className="text-sm">{step}</span>
         )}
@@ -344,7 +344,7 @@ function StepConnector({ isComplete }: StepConnectorProps) {
   );
 }
 
-type CheckIconProps = React.SVGProps<SVGSVGElement>
+type CheckIconProps = React.SVGProps<SVGSVGElement>;
 
 function CheckIcon(props: CheckIconProps) {
   return (

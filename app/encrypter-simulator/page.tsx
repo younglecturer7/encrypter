@@ -8,7 +8,7 @@ function DecrypterSimulatorPage() {
   const [name, setName] = useState("");
 
   return (
-    <div className="flex flex-row mx-auto justify-center gap-4 py-4 md:gap-6 md:py-6">
+    <div className="flex mx-auto flex-1 flex-col items-center justify-center gap-4 py-4 md:gap-6 md:py-6">
       {/* <Card className="w-full md:max-w-xl px-2">
         <CardHeader className="text-center">
           <CardTitle>Encrypter Simulator App</CardTitle>
@@ -23,7 +23,7 @@ function DecrypterSimulatorPage() {
         onFinalStepCompleted={() => console.log("All steps completed!")}
         backButtonText="Previous"
         nextButtonText="Continue"
-        className="w-full md:min-w-7xl mx-auto justify-center"
+        className="px-3 mx-auto w-full"
         // stepCircleContainerClassName="bg-gray-100 dark:bg-gray-700"
         // stepContainerClassName="bg-green-500 dark:bg-gray-300"
       >

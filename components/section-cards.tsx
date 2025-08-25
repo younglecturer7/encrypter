@@ -17,7 +17,7 @@ export function SectionCards() {
     <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Encrypter Simulator App</CardDescription>
+          <CardDescription>Encryption Simulator App</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
             1,280{" "}
             <small className="text-xs text-green-700 italic">
@@ -42,7 +42,7 @@ export function SectionCards() {
           </div>
           <CardAction className="flex-1 justify-center text-center gap-1.5">
             <Button variant="outline" size="sm" asChild>
-              <Link href="encrypter-simulator">Open Encrypter Simulator</Link>
+              <Link href="encrypter-simulator">Open Encryption Simulator</Link>
             </Button>
           </CardAction>
         </CardFooter>
@@ -50,7 +50,7 @@ export function SectionCards() {
 
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Decrypter Simulator App</CardDescription>
+          <CardDescription>Decryption Simulator App</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
             1,980{" "}
             <small className="text-xs text-green-700 italic">
@@ -75,7 +75,7 @@ export function SectionCards() {
           </div>
           <CardAction className="flex-1 justify-center text-center gap-1.5">
             <Button variant="outline" size="sm" asChild>
-              <Link href="decrypter-simulator">Open Decrypter Simulator</Link>
+              <Link href="decrypter-simulator">Open Decryption Simulator</Link>
             </Button>
           </CardAction>
         </CardFooter>
@@ -83,7 +83,7 @@ export function SectionCards() {
 
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Encrypter App</CardDescription>
+          <CardDescription>Encryption App</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
             1,645{" "}
             <small className="text-xs text-green-700 italic">
@@ -108,7 +108,7 @@ export function SectionCards() {
           </div>
           <CardAction className="flex-1 justify-center text-center gap-1.5">
             <Button variant="outline" size="sm" asChild>
-              <Link href="encrypter">Open Encrypter</Link>
+              <Link href="encrypter">Open Encryption App</Link>
             </Button>
           </CardAction>
         </CardFooter>
@@ -116,7 +116,7 @@ export function SectionCards() {
 
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Decrypter App</CardDescription>
+          <CardDescription>Decryption App</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
             1,370{" "}
             <small className="text-xs text-green-700 italic">
@@ -141,7 +141,7 @@ export function SectionCards() {
           </div>
           <CardAction className="flex-1 justify-center text-center gap-1.5">
             <Button variant="outline" size="sm" asChild>
-              <Link href="decrypter">Open Decrypter</Link>
+              <Link href="decrypter">Open Decryption App</Link>
             </Button>
           </CardAction>
         </CardFooter>
