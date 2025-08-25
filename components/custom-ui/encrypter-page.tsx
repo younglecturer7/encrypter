@@ -41,8 +41,6 @@ export function EncrypterCard() {
   const onSubmit = (data: z.infer<typeof formSchema>) => {
 
     // display a toast notification with the submitted data
-    // you can customize the toast as needed
-   
     toast.success("Your message had been encrypted.", {
       // description: (
       //   <p className="text-sm text-muted-foreground">
@@ -91,12 +89,12 @@ export function EncrypterCard() {
             <Button type="submit" className="w-full">
               Encrypt Message
             </Button>
-            <Button type="button" variant="outline" className="w-full">
+            {/* <Button type="button" variant="outline" className="w-full">
               Generate key
             </Button>
             <Button type="button" variant="outline" className="w-full">
               Transmit Encrypted Message
-            </Button>
+            </Button> */}
           </CardFooter>
         </form>
       </Form>
