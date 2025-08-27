@@ -22,6 +22,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import useCompressEncryptHook from "@/hooks/useCompressEncryptHook";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   IconArrowsRight,
@@ -31,7 +32,6 @@ import {
   IconCloudLock,
   IconBellRinging,
 } from "@tabler/icons-react";
-import { TerminalIcon } from "lucide-react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -42,10 +42,19 @@ const formSchema = z.object({
   message: z.string().min(1, { message: "message is required" }),
 });
 
+type messageData = {
+  compressedData: string;
+  originalByteSize: number;
+  compressedByteSize: number;
+};
+
 function EncrypterSimulatorPage() {
   // const [name, setName] = useState("");
   const [nextButtonText, setNextButtonText] = useState("Next");
-  const [compress, setCompress] = useState(false)
+  const [compress, setCompress] = useState(false);
+  const [message, setMessage] = useState<messageData | null>(null);
+  const [autoKey, setAutoKey] = useState<string | null>(null);
+  const { Compressor, AutoKeyGenerator, Encryptor } = useCompressEncryptHook();
 
   // useform is here
   const form = useForm<z.infer<typeof formSchema>>({
@@ -57,6 +66,22 @@ function EncrypterSimulatorPage() {
 
   // handle onSubmit
   const onSubmit = (data: z.infer<typeof formSchema>) => {
+
+    // generate auto key here
+    const keys = AutoKeyGenerator();
+    setAutoKey(keys);
+
+    // call compress function
+    const { compressedData, originalByteSize, compressedByteSize } = Compressor(
+      data.message
+    );
+
+    // encrypt the compressed data here
+    // const encryptedMessage = Encryptor(compressedData, autoKey);
+
+    // set message state
+    setMessage({ compressedData, originalByteSize, compressedByteSize });
+
     // display notification
     toast.success("Your message had been compressed.", {
       // description: (
@@ -72,8 +97,8 @@ function EncrypterSimulatorPage() {
       icon: <IconBellCheck stroke={2} />,
     });
 
-    console.log("form data: ", data);
-     setCompress(true);
+    // disable compress button
+    setCompress(true);
   };
 
   // step changes
@@ -83,11 +108,11 @@ function EncrypterSimulatorPage() {
     switch (step) {
       case 1:
         setNextButtonText("Next");
-       
         break;
 
       case 2:
         setNextButtonText("Encrypt Message & Key");
+        setCompress(false);
         break;
 
       case 3:
@@ -172,15 +197,15 @@ function EncrypterSimulatorPage() {
                 <div className="flex justify-between items-center">
                   <div className="flex relative flex-col items-center">
                     <div className="flex relative">
-                      <IconMailCode size={100} stroke={2} className="" />
+                      <IconMailCode size={80} stroke={2} className="" />
                       <Badge
                         variant="destructive"
-                        className="inline-block absolute top-2 left-15"
+                        className="inline-block absolute top-2 left-7"
                       >
-                        250kb
+                        {`${message?.originalByteSize} bytes`}
                       </Badge>
                     </div>
-                    <p className="text-xs italic">Input Message Size</p>
+                    <p className="text-xs italic">Input Message</p>
                   </div>
 
                   <IconArrowsRight
@@ -191,15 +216,15 @@ function EncrypterSimulatorPage() {
 
                   <div className="flex relative flex-col items-center">
                     <div className="flex relative">
-                      <IconMailCode size={100} stroke={2} className="" />
+                      <IconMailCode size={80} stroke={2} className="" />
                       <Badge
                         variant="default"
-                        className="inline-block absolute top-2 left-15"
+                        className="inline-block absolute top-2 left-7"
                       >
-                        50kb
+                        {`${message?.compressedByteSize} bytes`}
                       </Badge>
                     </div>
-                    <p className="text-xs italic">Compressed Message Size</p>
+                    <p className="text-xs italic">Compressed Message</p>
                   </div>
                 </div>
                 <hr className="text-muted" />
@@ -209,7 +234,7 @@ function EncrypterSimulatorPage() {
                     disabled
                     id="autoKeyGen"
                     type="text"
-                    value={"aga48yashaa7shsjsnhd0988hjhshs"}
+                    value={autoKey || ""}
                   />
                 </div>
               </div>
@@ -269,7 +294,8 @@ function EncrypterSimulatorPage() {
             <IconBellRinging size={10} stroke={2} className="" />
             <AlertTitle>Message Transmitted Successfully!</AlertTitle>
             <AlertDescription>
-              Both encrypted messages and auto key generated had been transmitted Successfully.
+              Both encrypted messages and auto key generated had been
+              transmitted Successfully.
             </AlertDescription>
           </Alert>
         </Step>

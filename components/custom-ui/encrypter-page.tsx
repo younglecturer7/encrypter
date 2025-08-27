@@ -22,6 +22,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { IconBellCheck } from "@tabler/icons-react";
+import useCompressHook from "@/hooks/useCompressEncryptHook";
 // import { type } from './../ui/chart';
 
 // declare form schema
@@ -29,8 +30,9 @@ const formSchema = z.object({
   message: z.string().min(1, "Message is required"),
 });
 
-
 export function EncrypterCard() {
+  const { Compressor } = useCompressHook();
+
   // initialize form with react-hook-form and zod for validation
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -39,7 +41,6 @@ export function EncrypterCard() {
 
   // handle form submission
   const onSubmit = (data: z.infer<typeof formSchema>) => {
-
     // display a toast notification with the submitted data
     toast.success("Your message had been encrypted.", {
       // description: (
@@ -55,7 +56,8 @@ export function EncrypterCard() {
       icon: <IconBellCheck stroke={2} />,
     });
 
-    console.log("Form Data:", data);
+    const compressedData = Compressor(data.message);
+    console.log("Compressed Data:", compressedData);
   };
 
   return (
