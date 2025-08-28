@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { ThemeToggle } from "./custom-ui/theme/ThemeToggle";
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 
 export function SiteHeader() {
   return (
@@ -14,7 +15,6 @@ export function SiteHeader() {
         />
         <h1 className="text-base font-medium">Mr. Obono Project</h1>
         <div className="ml-auto flex items-center gap-2">
-          <ThemeToggle />
           <Button variant="ghost" asChild size="sm" className="hidden sm:flex">
             <a
               href="https://github.com/shadcn-ui/ui/tree/main/apps/v4/app/(examples)/dashboard"
@@ -25,6 +25,24 @@ export function SiteHeader() {
               Young Mind Tech
             </a>
           </Button>
+          <ThemeToggle />
+          <div className="flex justify-end items-center p-4 gap-4 h-16">
+            <SignedOut>
+              <SignInButton>
+                <button className="bg-transparent border border-ceramic-white text-ceramic-white rounded-full font-medium text-lime-600 hover:text-lime-100 text-sm h-5 sm:h-8 px-4 sm:px-4 sm:text-base hover:bg-lime-600 cursor-pointer">
+                  Sign In
+                </button>
+              </SignInButton>
+              <SignUpButton>
+                <button className="bg-lime-600 text-ceramic-white rounded-full font-medium text-sm text-lime-100 hover:bg-lime-50 hover:text-lime-600 sm:text-base h-5 sm:h-8 px-4 sm:px-4 cursor-pointer">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </div>
         </div>
       </div>
     </header>

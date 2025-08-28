@@ -54,7 +54,7 @@ function EncrypterSimulatorPage() {
   const [compress, setCompress] = useState(false);
   const [message, setMessage] = useState<messageData | null>(null);
   const [autoKey, setAutoKey] = useState<string | null>(null);
-  const { Compressor, AutoKeyGenerator, Encryptor } = useCompressEncryptHook();
+  const { Compressor, AutoKeyGenerator } = useCompressEncryptHook();
 
   // useform is here
   const form = useForm<z.infer<typeof formSchema>>({
