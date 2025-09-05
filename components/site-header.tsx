@@ -26,6 +26,7 @@ export function SiteHeader() {
             </a>
           </Button>
           <ThemeToggle />
+          {/* sign and sign-out */}
           <div className="flex justify-end items-center p-4 gap-4 h-16">
             <SignedOut>
               <SignInButton>
