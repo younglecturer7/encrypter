@@ -75,25 +75,34 @@ export default function Page() {
           <CardFooter className="flex flex-col items-start">
             <CardAction className="flex justify-end items-center p-4 gap-4 h-16">
               <SignedOut>
-                <SignInButton>
-                  <Button className="bg-transparent hover:bg-primary border-2 border-primary border-ceramic-white text-ceramic-white rounded-full font-medium  text-sm h-5 sm:h-8 px-4 sm:px-4 py-3 sm:py-3 sm:text-base cursor-pointer">
-                    Sign In
-                  </Button>
-                </SignInButton>
-                <SignUpButton>
-                  <Button className="bg-primary hover:bg-transparent hover:border-2 hover:border-primary text-ceramic-white rounded-full font-medium text-sm sm:text-base h-5 sm:h-8 px-4 sm:px-4 py-3 sm:py-3 cursor-pointer">
-                    Sign Up
-                  </Button>
-                </SignUpButton>
+                <div className="flex flex-col justify-items-start">
+                  <div className="flex items-center gap-2 mb-1">
+                    <SignInButton>
+                      <Button className="bg-transparent hover:bg-primary border-2 border-primary border-ceramic-white text-ceramic-white rounded-full font-medium  text-sm h-5 sm:h-8 px-4 sm:px-4 py-3 sm:py-3 sm:text-base cursor-pointer">
+                        Sign In
+                      </Button>
+                    </SignInButton>
+                    <SignUpButton>
+                      <Button className="bg-primary hover:bg-transparent hover:border-2 hover:border-primary text-ceramic-white rounded-full font-medium text-sm sm:text-base h-5 sm:h-8 px-4 sm:px-4 py-3 sm:py-3 cursor-pointer">
+                        Sign Up
+                      </Button>
+                    </SignUpButton>
+                  </div>
+                  <CardDescription className="text-xs mt-1 italic text-destructive">
+                    Please Sign-Up if you are using this application for the
+                    first time or Sign-In if you have already registered.
+                  </CardDescription>
+                </div>
               </SignedOut>
               <SignedIn>
-                <UserButton />
+                <div className="flex justify-between items-center gap-4">
+                  <UserButton />
+                  <Button className="bg-primary mr-auto hover:bg-transparent hover:border-2 hover:border-primary text-ceramic-white rounded-full font-medium text-sm sm:text-base h-5 sm:h-8 px-4 sm:px-4 py-3 sm:py-3 cursor-pointer">
+                    <Link href={"/dashboard"}>Go Home</Link>
+                  </Button>
+                </div>
               </SignedIn>
             </CardAction>
-            <CardDescription className="text-xs italic text-destructive">
-              Please Sign-Up if you are using this application for the first
-              time or Sign-In if you have already registered.
-            </CardDescription>
           </CardFooter>
         </Card>
       </main>
@@ -104,16 +113,17 @@ export default function Page() {
 
 // for footer section
 export function Footer() {
-  return <footer className="flex flex-col py-3 w-full bg-background sticky bottom-0 h-16 shrink-0 items-center justify-center border-t">
-    <p className="text-sm text-pretty flex px-10 text-muted-foreground">
-      &copy; 2025 Encrypt App; All rights reserved.
-    </p>
-    <p className='text-sm text-pretty flex px-10 text-muted-foreground'>
-      Powered By{" "}
-      <Link href={"#YoungMindTech"} className="text-pretty px-1">
-        <strong>Young Mind Tech (YMT)</strong>
-      </Link>
-    </p>
-  </footer>;
+  return (
+    <footer className="flex flex-col py-3 w-full bg-background sticky bottom-0 h-16 shrink-0 items-center justify-center border-t">
+      <p className="text-sm text-pretty flex px-10 text-muted-foreground">
+        &copy; 2025 Encrypt App; All rights reserved.
+      </p>
+      <p className="text-sm text-pretty flex px-10 text-muted-foreground">
+        Powered By{" "}
+        <Link href={"#YoungMindTech"} className="text-pretty px-1">
+          <strong>Young Mind Tech (YMT)</strong>
+        </Link>
+      </p>
+    </footer>
+  );
 }
-
