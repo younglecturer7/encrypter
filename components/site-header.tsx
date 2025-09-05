@@ -2,11 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { ThemeToggle } from "./custom-ui/theme/ThemeToggle";
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 
 export function SiteHeader() {
   return (
-    <header className="flex h-(--header-height) sticky top-0 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
+    <header className="flex h-(--header-height) bg-background sticky top-0 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
       <div className="flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6">
         <SidebarTrigger className="-ml-1" />
         <Separator
@@ -26,24 +25,6 @@ export function SiteHeader() {
             </a>
           </Button>
           <ThemeToggle />
-          {/* sign and sign-out */}
-          <div className="flex justify-end items-center p-4 gap-4 h-16">
-            <SignedOut>
-              <SignInButton>
-                <button className="bg-transparent border border-ceramic-white text-ceramic-white rounded-full font-medium text-lime-600 hover:text-lime-100 text-sm h-5 sm:h-8 px-4 sm:px-4 sm:text-base hover:bg-lime-600 cursor-pointer">
-                  Sign In
-                </button>
-              </SignInButton>
-              <SignUpButton>
-                <button className="bg-lime-600 text-ceramic-white rounded-full font-medium text-sm text-lime-100 hover:bg-lime-50 hover:text-lime-600 sm:text-base h-5 sm:h-8 px-4 sm:px-4 cursor-pointer">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </div>
         </div>
       </div>
     </header>

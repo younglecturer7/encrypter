@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
-import { SiteHeader } from "@/components/site-header";
+
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/custom-ui/theme/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -35,22 +33,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <ThemeProvider>
-            <SidebarProvider
-              style={
-                {
-                  "--sidebar-width": "calc(var(--spacing) * 72)",
-                  "--header-height": "calc(var(--spacing) * 12)",
-                } as React.CSSProperties
-              }
-            >
-              <AppSidebar variant="inset" />
-              <SidebarInset>
-                <SiteHeader />
-                <div className="flex flex-1 flex-col">
-                  <div className="@container/main flex flex-1">{children}</div>
-                </div>
-              </SidebarInset>
-            </SidebarProvider>
+            {children}
             <Toaster richColors closeButton position="bottom-right" />
           </ThemeProvider>
         </body>
