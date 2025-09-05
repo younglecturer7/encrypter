@@ -97,17 +97,23 @@ export default function Page() {
           </CardFooter>
         </Card>
       </main>
-      <footer className="flex flex-col py-3 w-full bg-background sticky bottom-0 h-16 shrink-0 items-center justify-center border-t">
-        <p className="text-sm text-pretty flex px-10 text-muted-foreground">
-          &copy; 2025 Encrypt App; All rights reserved.
-        </p>
-        <p className='text-sm text-pretty flex px-10 text-muted-foreground'>
-          Powered By{" "}
-          <Link href={"#YoungMindTech"} className="text-pretty px-1">
-            <strong>Young Mind Tech (YMT)</strong>
-          </Link>
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }
+
+// for footer section
+export function Footer() {
+  return <footer className="flex flex-col py-3 w-full bg-background sticky bottom-0 h-16 shrink-0 items-center justify-center border-t">
+    <p className="text-sm text-pretty flex px-10 text-muted-foreground">
+      &copy; 2025 Encrypt App; All rights reserved.
+    </p>
+    <p className='text-sm text-pretty flex px-10 text-muted-foreground'>
+      Powered By{" "}
+      <Link href={"#YoungMindTech"} className="text-pretty px-1">
+        <strong>Young Mind Tech (YMT)</strong>
+      </Link>
+    </p>
+  </footer>;
+}
+
