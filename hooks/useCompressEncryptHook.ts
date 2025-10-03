@@ -1,10 +1,7 @@
 import * as compressor from "lz-string";
 import CryptoJS from "crypto-js";
 
-type EncryptData = {
-  data: string;
-  autoKey: string;
-};
+
 
 export default function useCompressEncryptHook() {
 
@@ -20,8 +17,49 @@ export default function useCompressEncryptHook() {
       getByteSize(compressedData) - getByteSize(compressedData) / 1.1
     );
 
+    // generate auto key
+    const autoKeyGen = AutoKeyGenerator()
+
+    // encrypt auto key & save into local storage
+    const encryptedAutoKey = Encryptor(autoKeyGen)
+    localStorage.setItem('encryptedAutoKey', encryptedAutoKey)
+
+    // encrypt message & save into local storage
+    const encryptedMessage = Encryptor(compressedData)
+    localStorage.setItem('encryptedMessage', encryptedMessage)
+
+    // get encrypted msg size and save into local storage
+    const originalEncryptedMsgSize = getByteSize(encryptedMessage);
+    const compressedEncryptedMsgSize = Math.ceil(
+      originalEncryptedMsgSize - (originalEncryptedMsgSize / 1.1)
+    );
+    localStorage.setItem('encryptedMsgSize', JSON.stringify(compressedEncryptedMsgSize))
+
+    // get encrypted key size and save into local storage
+    const originalEncryptedKeySize = getByteSize(encryptedAutoKey);
+    const compressedEncryptedKeySize = Math.ceil(
+      originalEncryptedKeySize - (originalEncryptedKeySize / 1.1)
+    );
+    localStorage.setItem('encryptedKeySize', JSON.stringify(compressedEncryptedKeySize))
+
+     // decrypt auto key & save into local storage
+    // const encAutoKey = JSON.stringify(localStorage.getItem('encryptedAutoKey'))
+    const decryptedAutoKey : string = Decryptor(encryptedAutoKey)
+    localStorage.setItem('decryptedAutoKey', decryptedAutoKey)
+
+    // decrypt message & save into local storage
+    // const encMsg = JSON.stringify(localStorage.getItem('encryptedMessage'))
+    const decryptedMessage : string = Decryptor(encryptedMessage)
+    localStorage.setItem('decryptedMessage', decryptedMessage)
+
+    // save into local storage
+    localStorage.setItem('compressedData', compressedData)
+    localStorage.setItem('compressedByteSize', JSON.stringify(compressedByteSize))
+    localStorage.setItem('originalData', originalData)
+    localStorage.setItem('originalByteSize', JSON.stringify(originalByteSize))
+
     // return compressed data and sizes
-    return { compressedData, originalByteSize, compressedByteSize };
+    return { compressedData };
   };
 
   // decompress data
@@ -36,7 +74,22 @@ export default function useCompressEncryptHook() {
       getByteSize(decompressedData) - getByteSize(decompressedData) / 1.1
     );
 
-    return { decompressedData, originalByteSize, decompressedByteSize };
+    // decrypt auto key & save into local storage
+    const encAutoKey = JSON.stringify(localStorage.getItem('encryptedAutoKey'))
+    const decryptedAutoKey : string = Decryptor(encAutoKey)
+    localStorage.setItem('decryptedAutoKey', decryptedAutoKey)
+
+    // decrypt message & save into local storage
+    const encMsg = JSON.stringify(localStorage.getItem('encryptedMessage'))
+    const decryptedMessage : string = Decryptor(encMsg)
+    localStorage.setItem('decryptedMessage', decryptedMessage)
+
+
+    // save into local storage
+    localStorage.setItem('decompressedData', decompressedData)
+    localStorage.setItem('decompressedByteSize', JSON.stringify(decompressedByteSize))
+
+    return { decryptedAutoKey, decryptedMessage };
   };
 
   // Convert to byte array
@@ -46,12 +99,15 @@ export default function useCompressEncryptHook() {
     return byteArray.length;
   }
 
-  // encrypt the compressed data here later
-  const Encryptor = (props: EncryptData) => {
+  // encrypt the compressed data here
+  const Encryptor = (data: string) => {
+
+    const autoKey: string  = JSON.stringify(localStorage.getItem('autoKeyGen'))
+
     // Placeholder for encryption logic
     const encryptMessage = CryptoJS.AES.encrypt(
-      JSON.stringify(props.data),
-      props.autoKey
+      JSON.stringify(data),
+      autoKey
     ).toString();
 
     // return encrypted message
@@ -59,7 +115,10 @@ export default function useCompressEncryptHook() {
   };
 
   // decrypt the encrypted data here later
-  const Decryptor = (data: string, autoKey: string) => {
+  const Decryptor = (data: string) => {
+
+    const autoKey: string  = JSON.stringify(localStorage.getItem('autoKeyGen'))
+
     // Placeholder for decryption logic
     const bytes = CryptoJS.AES.decrypt(data, autoKey);
     const decryptedMessage = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
@@ -75,6 +134,7 @@ export default function useCompressEncryptHook() {
     const numbers = "0123456789";
     const special = "!@#$%^&*()-_=+[]{}|;:,.<>?/`~";
 
+    // combine all characters
     const allChars = upper + lower + numbers + special;
     let result = "";
 
@@ -90,10 +150,38 @@ export default function useCompressEncryptHook() {
     }
 
     // Shuffle the result to avoid predictable placement
-    return result
+    const autoKeyGen = result
       .split("")
       .sort(() => 0.5 - Math.random())
       .join("");
+
+    // save auto key gen
+    localStorage.setItem('autoKeyGen', autoKeyGen)
+
+    // return key
+    return autoKeyGen
+  }
+
+  // Encrypted message size
+  const EncryptedMessageSize = (encryptedMsg: string) => {
+    const encMsgSize = getByteSize(encryptedMsg)
+
+    // save encrypted msg size
+    localStorage.setItem('encMsgSize', JSON.stringify(encMsgSize))
+
+    // return encrypted msg size
+    return { encMsgSize }
+  }
+
+  // encrypted key size
+  const EncryptedKeySize = (encryptedKey: string) => {
+    const encKeySize = getByteSize(encryptedKey)
+
+    // save encrypted key size
+    localStorage.setItem('encKeySize', JSON.stringify(encKeySize))
+
+    // return key size
+    return { encKeySize }
   }
 
 
@@ -104,5 +192,7 @@ export default function useCompressEncryptHook() {
     Encryptor,
     Decryptor,
     AutoKeyGenerator,
+    EncryptedMessageSize,
+    EncryptedKeySize
   };
 }

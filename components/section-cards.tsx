@@ -14,7 +14,7 @@ import Link from "next/link";
 
 export function SectionCards() {
   return (
-    <div className="flex max-sm:flex-col max-sm:space-y-5 max-sm:justify-center mb-10 w-full justify-center items-start mx-auto space-x-5 px-5">
+    <div className="flex flex-wrap max-sm:flex-col max-sm:space-y-5 max-sm:justify-center mb-10 w-full justify-center mx-auto space-x-5 space-y-5 px-5">
       <Card className="w-fit min-w-xs">
         <CardHeader>
           <CardDescription>Encryption Simulator App</CardDescription>
@@ -136,7 +136,7 @@ export function SectionCards() {
               Message decompressed is 100% accurate.
             </div>
             <div className="text-muted-foreground text-xs italic">
-              20 Visitors for the last 6 months...
+              29 Visitors for the last 6 months...
             </div>
           </div>
           <CardAction className="flex-1 justify-center text-center gap-1.5">
@@ -146,6 +146,7 @@ export function SectionCards() {
           </CardAction>
         </CardFooter>
       </Card>
+      
     </div>
   );
 }

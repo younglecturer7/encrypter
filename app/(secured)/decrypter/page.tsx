@@ -4,7 +4,7 @@ import React from 'react'
 function DecrypterPage() {
 
   return (
-    <div className="flex flex-col mx-auto gap-4 py-4 md:gap-6 md:py-6">
+    <div className="flex w-full min-h-screen flex-col items-center justify-center gap-6 p-6 md:p-10">
       <DecrypterCard />
     </div>
   );

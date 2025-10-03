@@ -8,7 +8,7 @@ import {
   IconUserCircle,
 } from "@tabler/icons-react";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,7 +25,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
-import { useClerk, UserButton, useUser } from "@clerk/nextjs";
+// import { useClerk, UserButton, useUser } from "@clerk/nextjs";
 
 export function NavUser({
   user,
@@ -37,8 +37,8 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
-  const { signOut } = useClerk();
-  const { user: currentUser } = useUser();
+  // const { signOut } = useClerk();
+  // const { user: currentUser } = useUser();
 
   return (
     <SidebarMenu>
@@ -50,16 +50,16 @@ export function NavUser({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg grayscale">
-                {/* <AvatarImage src={user.avatar} alt={user.name} /> */}
-                <UserButton />
-                {/* <AvatarFallback className="rounded-lg">CN</AvatarFallback> */}
+                <AvatarImage src={user.avatar} alt={user.name} />
+                {/* <UserButton /> */}
+                <AvatarFallback className="rounded-lg">OB</AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
+              {/* <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{`${currentUser?.firstName} ${currentUser?.lastName}`}</span>
                 <span className="text-muted-foreground truncate text-xs">
                   {currentUser?.primaryEmailAddress?.emailAddress}
                 </span>
-              </div>
+              </div> */}
               <IconDotsVertical className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
@@ -75,13 +75,13 @@ export function NavUser({
                   <AvatarImage src={user.avatar} alt={user.name} />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar> */}
-                <UserButton />
+                {/* <UserButton />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{`${currentUser?.firstName} ${currentUser?.lastName}`}</span>
                   <span className="text-muted-foreground truncate text-xs">
                     {currentUser?.primaryEmailAddress?.emailAddress}
                   </span>
-                </div>
+                </div> */}
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -99,8 +99,8 @@ export function NavUser({
                 Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            {/* <DropdownMenuSeparator /> */}
+            {/* <DropdownMenuItem>
               <Button
                 onClick={async () => await signOut({ redirectUrl: "/" })}
                 variant="ghost"
@@ -109,7 +109,7 @@ export function NavUser({
                 <IconLogout />
                 Log Out Here
               </Button>
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

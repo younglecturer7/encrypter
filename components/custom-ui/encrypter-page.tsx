@@ -41,8 +41,9 @@ export function EncrypterCard() {
 
   // handle form submission
   const onSubmit = (data: z.infer<typeof formSchema>) => {
+
     // display a toast notification with the submitted data
-    toast.success("Your message had been encrypted.", {
+    toast.success("Message processed and transmitted successfully.", {
       // description: (
       //   <p className="text-sm text-muted-foreground">
       //     <em className="text-xs">{data.message}</em>
@@ -57,7 +58,7 @@ export function EncrypterCard() {
     });
 
     const compressedData = Compressor(data.message);
-    console.log("Compressed Data:", compressedData);
+    form.reset()
   };
 
   return (
@@ -89,14 +90,8 @@ export function EncrypterCard() {
           </CardContent>
           <CardFooter className="flex-col gap-2">
             <Button type="submit" className="w-full">
-              Encrypt Message
+              Send Message
             </Button>
-            {/* <Button type="button" variant="outline" className="w-full">
-              Generate key
-            </Button>
-            <Button type="button" variant="outline" className="w-full">
-              Transmit Encrypted Message
-            </Button> */}
           </CardFooter>
         </form>
       </Form>
