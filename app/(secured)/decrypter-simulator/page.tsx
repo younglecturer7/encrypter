@@ -67,7 +67,6 @@ function DecrypterSimulatorPage() {
 
   // step changes
   const handleStepChange = (step: number) => {
-    console.log("current step: ", step);
 
     switch (step) {
       case 1:
@@ -96,7 +95,6 @@ function DecrypterSimulatorPage() {
 
   // final step completed
   const handleFinalStepCompleted = () => {
-    console.log("All steps completed!");
 
     toast.success("All steps completed!");
   };
@@ -120,23 +118,13 @@ function DecrypterSimulatorPage() {
             </CardHeader>
             <CardContent className="space-y-5">
 
-              {/* <Alert variant="default" className="">
-                <AlertTitle className="flex justify-between">
-                  Encrypted Message 
-                  <Badge><strong>Size:</strong> {message.encryptedMsgSize} bytes</Badge>
-                </AlertTitle>
-                <AlertDescription className="flex flex-wrap max-w-[20px]">
-                  <p className="">{message.encryptedMessage}</p>
-                </AlertDescription>
-              </Alert> */}
-
-              <Alert variant="default">
-                <AlertTitle className="flex justify-between">
+              <Alert variant="default" className="flex flex-col space-y-5">
+                <AlertTitle className="flex w-full justify-between">
                   Encrypted Key Received
                   <Badge><strong>Size:</strong> {message.encryptedKeySize} bytes</Badge>
                 </AlertTitle>
-                <AlertDescription className="flex flex-wrap max-w-[20px]">
-                  {message.encryptedMessage}
+                <AlertDescription>
+                  <p className="truncate max-w-[95%]">{message.encryptedMessage}</p>
                 </AlertDescription>
               </Alert>
 
@@ -152,23 +140,23 @@ function DecrypterSimulatorPage() {
             </CardHeader>
             <CardContent className="space-y-5">
 
-              <Alert variant="default">
-                <AlertTitle className="flex justify-between">
+             <Alert variant="default" className="flex flex-col space-y-5">
+                <AlertTitle className="flex w-full justify-between">
                   Encrypted Message 
                   <Badge><strong>Size:</strong> {message.encryptedMsgSize} bytes</Badge>
                 </AlertTitle>
-                <AlertDescription className="flex flex-wrap max-w-[20px]">
-                  <p className="">{message.encryptedMessage}</p>
+                <AlertDescription>
+                  <p className="truncate max-w-[95%]">{message.encryptedMessage}</p>
                 </AlertDescription>
               </Alert>
 
-              <Alert variant="default">
-                <AlertTitle className="flex justify-between">
+              <Alert variant="default" className="flex flex-col space-y-5">
+                <AlertTitle className="flex w-full justify-between">
                   Decrypted Key
                   <Badge><strong>Size:</strong> {message.encryptedKeySize} bytes</Badge>
                 </AlertTitle>
-                <AlertDescription className="flex flex-wrap max-w-[40px]">
-                  {message.decryptedAutoKey}
+                <AlertDescription>
+                 <p className="truncate max-w-[95%]">{message.decryptedAutoKey}</p> 
                 </AlertDescription>
               </Alert>
 
@@ -184,13 +172,13 @@ function DecrypterSimulatorPage() {
             </CardHeader>
             <CardContent className="space-y-5">
 
-              <Alert variant="default">
-                <AlertTitle className="flex justify-between">
+              <Alert variant="default" className="flex flex-col space-y-5">
+                <AlertTitle className="flex w-full justify-between">
                   Compressed Message
                   <Badge><strong>Size:</strong> {message.encryptedKeySize} bytes</Badge>
                 </AlertTitle>
-                <AlertDescription className="flex flex-wrap max-w-[20px]">
-                  {message.encryptedMessage}
+                <AlertDescription>
+                  <p className="truncate max-w-[95%]">{message.encryptedMessage}</p>
                 </AlertDescription>
               </Alert>
 
