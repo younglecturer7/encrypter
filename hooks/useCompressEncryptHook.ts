@@ -185,7 +185,7 @@ export default function useCompressEncryptHook() {
   }
 
 
-  // rereturn all functions
+  // return all functions
   return {
     Compressor,
     Decompressor,

@@ -21,8 +21,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import useCompressEncryptHook from "@/hooks/useCompressEncryptHook";
+import useEncryptHook from "@/hooks/useEncryptHook";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   IconArrowsRight,
@@ -32,6 +34,7 @@ import {
   IconCloudLock,
   IconBellRinging,
 } from "@tabler/icons-react";
+import { BadgeAlertIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -48,11 +51,13 @@ interface messageData {
   encryptedAutoKey: string | null;
   encryptedMessage: string | null;
   encryptedMsgSize: string | null;
+  encryptedMsgTime: string | null;
   encryptedKeySize: string | null;
-  compressedData: string | null;
-  compressedByteSize: string | null;
-  originalByteSize: string | null;
-  originalData: string | null;
+  compressedMsgTime: string | null;
+  compressedMessage: string | null;
+  compressedMsgSize: string | null;
+  originalMessage: string | null;
+  originalMsgSize: string | null;
 };
 
 function EncrypterSimulatorPage() {
@@ -63,7 +68,8 @@ function EncrypterSimulatorPage() {
   const [compress, setCompress] = useState(false);
   const [message, setMessage] = useState<messageData>({} as messageData);
 
-  const { Compressor } = useCompressEncryptHook();
+  // const { Compressor } = useCompressEncryptHook();
+  const { compressedMsg } = useEncryptHook();
 
 
   // useform is here
@@ -78,7 +84,10 @@ function EncrypterSimulatorPage() {
   const onSubmit = (data: z.infer<typeof formSchema>) => {
 
     // call compress function
-    const compressor = Compressor(
+    // const compressor = Compressor(
+    //   data.message
+    // );
+    const compressor = compressedMsg(
       data.message
     );
 
@@ -86,17 +95,19 @@ function EncrypterSimulatorPage() {
     const autoKeyGen = localStorage.getItem('autoKeyGen')
     const encryptedAutoKey = localStorage.getItem('encryptedAutoKey')
     const encryptedMessage = localStorage.getItem('encryptedMessage')
+    const encryptedMsgTime = localStorage.getItem('encryptMsgTime')
+    const compressedMessage = localStorage.getItem('compressedMessage')
+    const compressedMsgTime = localStorage.getItem('compressedMsgTime')
+    const compressedMsgSize = localStorage.getItem('compressedMsgSize')
+    const originalMessage = localStorage.getItem('originalMessage')
+    const originalMsgSize = localStorage.getItem('originalMessageSize')
     const encryptedMsgSize = localStorage.getItem('encryptedMsgSize')
     const encryptedKeySize = localStorage.getItem('encryptedKeySize')
-    const compressedData = localStorage.getItem('compressedData')
-    const compressedByteSize = localStorage.getItem('compressedByteSize')
-    const originalByteSize = localStorage.getItem('originalByteSize')
-    const originalData = localStorage.getItem('originalData')
 
     // set message state variables
     setMessage({
-      autoKeyGen, compressedByteSize, compressedData, encryptedAutoKey, encryptedKeySize, encryptedMessage, encryptedMsgSize, originalByteSize, originalData
-     });
+      autoKeyGen, compressedMessage, compressedMsgSize, encryptedAutoKey, encryptedMessage, encryptedMsgTime, compressedMsgTime, originalMsgSize, originalMessage, encryptedMsgSize, encryptedKeySize
+    });
 
     // display notification
     toast.success("Your message had been compressed.", {
@@ -236,7 +247,7 @@ function EncrypterSimulatorPage() {
                         variant="destructive"
                         className="inline-block absolute top-2 left-7"
                       >
-                        {`${message.originalByteSize} bytes`}
+                        {`${message.originalMsgSize} bytes`}
                       </Badge>
                     </div>
                     <p className="text-xs italic">Input Message</p>
@@ -255,7 +266,7 @@ function EncrypterSimulatorPage() {
                         variant="default"
                         className="inline-block absolute top-2 left-7"
                       >
-                        {`${message?.compressedByteSize} bytes`}
+                        {`${message?.compressedMsgSize} bytes`}
                       </Badge>
                     </div>
                     <p className="text-xs italic">Compressed Message</p>
@@ -325,16 +336,118 @@ function EncrypterSimulatorPage() {
         {/* both message and key transmitted */}
         <Step>
           <Alert variant="default">
-            <IconBellRinging size={10} stroke={2} className="" />
+            <IconBellRinging size={10} stroke={2} />
             <AlertTitle>Message Transmitted Successfully!</AlertTitle>
             <AlertDescription>
               Both encrypted message and auto key generated had been
               transmitted Successfully.
             </AlertDescription>
           </Alert>
+          <Separator className="my-2" />
+          {/* performnace metric */}
+          <Card className="w-full md:max-w-xl px-2 mb-8">
+            <CardHeader className="text-center">
+              <CardTitle>Performance Metrics</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col border-1 rounded-2xl my-2 p-3">
+                <div className="flex mx-1.5 mb-1 hover:bg-background hover:px-3 hover:rounded-2xl hover:cursor-pointer">
+                  <p className="font-serif font-xs">Original Message Size</p>
+                  <Badge
+                    variant="default"
+                    className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
+                  >
+                    <BadgeAlertIcon />
+                    {message?.originalMsgSize} bytes
+                  </Badge>
+                </div>
+                <div className="flex mx-1.5 mb-1 hover:bg-background hover:px-3 hover:rounded-2xl hover:cursor-pointer">
+                  <p className="font-serif font-xs">Compressed Message Size</p>
+                  <Badge
+                    variant="default"
+                    className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
+                  >
+                    <BadgeAlertIcon />
+                    {message?.compressedMsgSize} bytes
+                  </Badge>
+                </div>
+                <div className="flex mx-1.5 mb-1 hover:bg-background hover:px-3 hover:rounded-2xl hover:cursor-pointer">
+                  <p className="font-serif font-xs">Encrypted Message Size</p>
+                  <Badge
+                    variant="default"
+                    className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
+                  >
+                    <BadgeAlertIcon />
+                    {message?.encryptedMsgSize} bytes
+                  </Badge>
+                </div>
+                <div className="flex mx-1.5 mb-1 hover:bg-background hover:px-3 hover:rounded-2xl hover:cursor-pointer">
+                  <p className="font-serif font-xs">Generated Random Key</p>
+                  <Badge
+                    variant="default"
+                    className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
+                  >
+                    {/* <BadgeAlertIcon /> */}
+                    {message?.autoKeyGen}
+                  </Badge>
+                </div>
+                <div className="flex mx-1.5 mb-1 hover:bg-background hover:px-3 hover:rounded-2xl hover:cursor-pointer">
+                  <p className="font-serif font-xs">Encryption Time</p>
+                  <Badge
+                    variant="default"
+                    className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
+                  >
+                    <BadgeAlertIcon />
+                    {message?.encryptedMsgTime}s
+                  </Badge>
+                </div>
+                {/* <div className="flex mx-1.5 mb-1 hover:bg-background hover:px-3 hover:rounded-2xl hover:cursor-pointer">
+                  <p className="font-serif font-xs">Decryption Time</p>
+                  <Badge
+                    variant="default"
+                    className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
+                  >
+                    <BadgeAlertIcon />
+                    10s
+                  </Badge>
+                </div> */}
+                <div className="flex mx-1.5 mb-1 hover:bg-background hover:px-3 hover:rounded-2xl hover:cursor-pointer">
+                  <p className="font-serif font-xs">Compression Time</p>
+                  <Badge
+                    variant="default"
+                    className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
+                  >
+                    <BadgeAlertIcon />
+                    {message?.compressedMsgTime}s
+                  </Badge>
+                </div>
+                {/* <div className="flex mx-1.5 mb-1 hover:bg-background hover:px-3 hover:rounded-2xl hover:cursor-pointer">
+                  <p className="font-serif font-xs">Decompression Time</p>
+                  <Badge
+                    variant="default"
+                    className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
+                  >
+                    <BadgeAlertIcon />
+                    15s
+                  </Badge>
+                </div> */}
+                <div className="flex mx-1.5 mb-1 hover:bg-background hover:px-3 hover:rounded-2xl hover:cursor-pointer">
+                  <p className="font-serif font-xs">Total Time of Sending Message</p>
+                  <Badge
+                    variant="default"
+                    className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
+                  >
+                    <BadgeAlertIcon />
+                    {message?.encryptedMsgTime}s
+                  </Badge>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
         </Step>
       </Stepper>
-      
+
     </div>
   );
 }

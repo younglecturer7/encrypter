@@ -160,7 +160,7 @@ export default function Stepper({
               <button
                 disabled={disableNextButton}
                 onClick={isLastStep ? handleComplete : handleNext}
-                className="duration-350 flex items-center justify-center rounded-full bg-green-500 py-1.5 px-3.5 font-medium tracking-tight text-white transition hover:bg-green-600 active:bg-green-700"
+                className="duration-350 flex items-center justify-center rounded-full bg-primary py-1.5 px-3.5 font-medium tracking-tight text-secondary hover:text-primary transition hover:bg-secondary hover:cursor-pointer active:bg-green-700"
                 {...nextButtonProps}
               >
                 {isLastStep ? "Complete" : nextButtonText}
