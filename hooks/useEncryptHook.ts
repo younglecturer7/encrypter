@@ -34,6 +34,10 @@ export default function useEncryptHook() {
         const encryptedMessage = encryptMessage(msg, randomKey);
         localStorage.setItem('encryptedMessage', encryptedMessage);
 
+        // encrypted message size and save into local storage
+        const encryptedMsgSize = uniqueCharCount * 1.5;
+        localStorage.setItem('encryptedMsgSize', JSON.stringify(encryptedMsgSize));
+
 
         // get encryption processing time and save into local storage
         const encryptMsgTime = measureEncryptedProcessingTime(msg, randomKey);

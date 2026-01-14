@@ -357,7 +357,7 @@ function EncrypterSimulatorPage() {
                     variant="default"
                     className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
                   >
-                    <BadgeAlertIcon />
+                    {/* <BadgeAlertIcon /> */}
                     {message?.originalMsgSize} bytes
                   </Badge>
                 </div>
@@ -367,7 +367,7 @@ function EncrypterSimulatorPage() {
                     variant="default"
                     className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
                   >
-                    <BadgeAlertIcon />
+                    {/* <BadgeAlertIcon /> */}
                     {message?.compressedMsgSize} bytes
                   </Badge>
                 </div>
@@ -377,7 +377,7 @@ function EncrypterSimulatorPage() {
                     variant="default"
                     className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
                   >
-                    <BadgeAlertIcon />
+                    {/* <BadgeAlertIcon /> */}
                     {message?.encryptedMsgSize} bytes
                   </Badge>
                 </div>
@@ -397,7 +397,7 @@ function EncrypterSimulatorPage() {
                     variant="default"
                     className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
                   >
-                    <BadgeAlertIcon />
+                    {/* <BadgeAlertIcon /> */}
                     {message?.encryptedMsgTime}s
                   </Badge>
                 </div>
@@ -417,7 +417,7 @@ function EncrypterSimulatorPage() {
                     variant="default"
                     className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
                   >
-                    <BadgeAlertIcon />
+                    {/* <BadgeAlertIcon /> */}
                     {message?.compressedMsgTime}s
                   </Badge>
                 </div>
@@ -437,7 +437,7 @@ function EncrypterSimulatorPage() {
                     variant="default"
                     className="bg-sidebar-accent text-sidebar-accent-foreground ml-auto"
                   >
-                    <BadgeAlertIcon />
+                    {/* <BadgeAlertIcon /> */}
                     {message?.encryptedMsgTime}s
                   </Badge>
                 </div>
